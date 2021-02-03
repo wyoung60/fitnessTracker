@@ -22,6 +22,9 @@ const WorkoutSchema = new mongoose.Schema({
       sets: {
         type: Number,
       },
+      distance: {
+        type: Number,
+      },
     },
   ],
 });
