@@ -37,11 +37,14 @@ module.exports = (app) => {
     });
   });
 
-  //Same as get above.  Used for table/graphs.
+  //Same as get above.  Used for table/graphs. Gets last 7 documents.
   app.get("/api/workouts/range", (req, res) => {
     db.Workout.aggregate([
       { $addFields: { totalDuration: { $sum: "$exercises.duration" } } },
     ])
+      .sort({ _id: -1 })
+      .limit(7)
+      .sort({ _id: 1 })
       .then((data) => {
         res.json(data);
       })
